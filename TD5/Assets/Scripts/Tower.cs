@@ -29,14 +29,13 @@ public class Tower : MonoBehaviour {
 		if (Time.time > lastFireTime + 1.0f / fireRate) { 
 			Fire (enemy.GetComponent<Enemy>());
 		}
-
 	}
 
 	void Fire (Enemy target) {
 		GameObject go = GameObject.Instantiate (bulletPrefab, transform.position, Quaternion.identity);
 		Projectile proj = go.GetComponent<Projectile> ();
 		proj.target = target;
-		proj.speed = 1.0f;
+		proj.speed = 5.0f;
 
 		lastFireTime = Time.time;
 	}
