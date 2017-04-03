@@ -13,4 +13,15 @@ public class Path : MonoBehaviour {
 		}
 		Gizmos.color = Color.white;
 	}
+
+	void Start() {
+		CheckPoint last = transform.GetChild (transform.childCount - 1).GetComponent<CheckPoint>();
+
+		for (int i = transform.childCount - 1; i >= 0; i--) {
+			CheckPoint cp = transform.GetChild (i).GetComponent<CheckPoint> ();
+			float dist = Vector3.Distance (cp.transform.position, last.transform.position);
+			cp.distanceToEnd = dist;
+			last = cp;
+		}
+	}
 }

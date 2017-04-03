@@ -7,12 +7,17 @@ public class Enemy : MonoBehaviour {
 	private const float EPSILON = 0.1f;
 
 	public float speed = 1.0f;
+	public float maxLife = 10.0f;
+
+	private float life;
 
 	private IEnumerator pathEnumerator;
 	private Vector3 targetPosition;
 
 	// Use this for initialization
 	void Start () {
+		life = maxLife;
+
 		Path path = FindObjectOfType<Path> ();
 		pathEnumerator = path.transform.GetEnumerator();
 		pathEnumerator.MoveNext ();
@@ -35,6 +40,19 @@ public class Enemy : MonoBehaviour {
 			} else {
 				Destroy (gameObject);
 			}
+		}
+	}
+
+	public float GetDistanceToEnd() {
+		Transform t = pathEnumerator.Current as Transform;
+		return Vector3.Distance(targetPosition, transform.position) + t.GetComponent<CheckPoint>().distanceToEnd;
+	}
+
+	public void Hit(float damage) {
+	
+		life -= damage;
+		if (life <= 0.0f) {
+			Destroy (this.gameObject);
 		}
 	}
 }

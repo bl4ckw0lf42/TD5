@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour {
 
+	public float distanceToEnd;
+
 	void OnDrawGizmos() {
 		int childIndex = transform.GetSiblingIndex ();
 		if (childIndex == 0) {
