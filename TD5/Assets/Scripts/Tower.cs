@@ -8,6 +8,7 @@ public class Tower : MonoBehaviour {
 	public float damage = 1.0f;
 	public float fireRate = 1.0f;
 	public float range = 1.0f;
+	public int price = 50;
 
 	private GameObject cannon;
 	private Vector3 currentDirection;

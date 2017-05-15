@@ -9,7 +9,13 @@ public class Enemy : MonoBehaviour {
 	public float speed = 1.0f;
 	public float maxLife = 10.0f;
 
+	public int value = 1;
+	public int strength = 1;
+
 	private float life;
+
+
+	private GameManager gm;
 
 	private IEnumerator pathEnumerator;
 	private Vector3 targetPosition;
@@ -17,6 +23,8 @@ public class Enemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		life = maxLife;
+
+		gm = GameObject.FindObjectOfType<GameManager> ().GetComponent<GameManager>();
 
 		Path path = FindObjectOfType<Path> ();
 		pathEnumerator = path.transform.GetEnumerator();
@@ -26,6 +34,7 @@ public class Enemy : MonoBehaviour {
 		pathEnumerator.MoveNext ();
 		t = pathEnumerator.Current as Transform;
 		targetPosition = t.position;
+
 	}
 	
 	// Update is called once per frame
@@ -38,7 +47,7 @@ public class Enemy : MonoBehaviour {
 				Transform t = pathEnumerator.Current as Transform;
 				targetPosition = t.position;
 			} else {
-				Destroy (gameObject);
+				OnEndOfPath();
 			}
 		}
 	}
@@ -52,7 +61,17 @@ public class Enemy : MonoBehaviour {
 	
 		life -= damage;
 		if (life <= 0.0f) {
-			Destroy (this.gameObject);
+			OnKilledByTower();
 		}
+	}
+
+	private void OnKilledByTower() {
+		gm.AddMoney (this.value);
+		Destroy (this.gameObject);
+	}
+
+	private void OnEndOfPath() {
+		gm.RemoveLives (this.strength);
+		Destroy (this.gameObject);
 	}
 }
