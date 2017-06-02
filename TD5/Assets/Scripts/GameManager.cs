@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
 	public int startingLives = 100;
+	public int staringMoney = 100;
 
 	private int lives;
 	private int money;
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		lives = startingLives;
+		money = staringMoney;
 	}
 
 	public int GetLives() {

@@ -8,9 +8,11 @@ public class UiUpdater : MonoBehaviour {
 	private Text livesDisplay;
 	private Text moneyDisplay;
 	private Text detailsText;
+	private TowerPanel towerPanel;
 
 	private GameObject detailsObject;
 	private GameManager gm;
+
 
 	private string towerDetailsTemplate = 
 		"Price:    {0}\n" +
@@ -24,7 +26,7 @@ public class UiUpdater : MonoBehaviour {
 		livesDisplay = GameObject.Find ("LivesDisplay").GetComponent<Text> ();
 		moneyDisplay = GameObject.Find ("MoneyDisplay").GetComponent<Text> ();
 		detailsText = GameObject.Find ("DetailsText").GetComponent<Text> ();
-
+		towerPanel = GameObject.Find ("TowerPanel").GetComponent<TowerPanel> ();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +35,7 @@ public class UiUpdater : MonoBehaviour {
 
 		UpdateDetailsPanel ();
 
+		UpdateTowerPanel ();
 		/*if (Input.GetMouseButtonDown (0)) {
 			detailsObject = null;
 		}*/
@@ -54,6 +57,10 @@ public class UiUpdater : MonoBehaviour {
 		} else if (detailsObject.GetComponent<Enemy> () != null) {
 			Enemy e = detailsObject.GetComponent<Enemy> ();
 		}
+	}
+
+	void UpdateTowerPanel() {
+		towerPanel.UpdateTowerPlaceholders (gm.GetMoney ());
 	}
 
 	public void SetDetailsObject(GameObject go) {

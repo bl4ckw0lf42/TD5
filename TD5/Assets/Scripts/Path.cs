@@ -24,4 +24,15 @@ public class Path : MonoBehaviour {
 			last = cp;
 		}
 	}
+
+	public List<Rect> GetPathRects() {
+		List<Rect> rects = new List<Rect> ();
+		for (int i = 0; i < transform.childCount - 1; i++) {
+			Transform fromPoint = transform.GetChild (i);
+			Transform toPoint = transform.GetChild (i + 1);
+
+		}
+
+		return rects;
+	}
 }
