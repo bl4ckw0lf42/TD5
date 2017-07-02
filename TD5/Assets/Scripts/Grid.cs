@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour {
 	public float Width = 1.0f;
 	public float Height = 1.0f;
 	public GameObject GridCellTemplate;
+	public Rect[] PreBlockList;
 
 	private GameObject gridCellsContainer;
 	private List<GridCell> gridCells = new List<GridCell>();
@@ -26,11 +27,26 @@ public class Grid : MonoBehaviour {
 		gridCellsContainer.SetActive (false);
 
 		createAllCells();
+
+		Preblock ();
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void Preblock() {
+		foreach (var cell in gridCells) {
+			foreach (var rect in PreBlockList) {
+				if (rect.Contains (cell.transform.position)) {
+					cell.Blocked = true;
+				}
+			}
+		}
+
 	}
 
 	public void ShowGridCells (Rect hitBox) {

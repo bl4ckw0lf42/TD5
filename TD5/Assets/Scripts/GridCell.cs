@@ -12,6 +12,8 @@ public class GridCell : MonoBehaviour {
 		set { 
 			blocked = value;
 			highlighted = false;
+			if (cellRenderer == null)
+				return;
 			Color clr = blocked ? Color.red : Color.white;
 			clr.a = cellRenderer.color.a;
 			cellRenderer.color = clr;
@@ -24,6 +26,8 @@ public class GridCell : MonoBehaviour {
 			if (blocked)
 				return;
 			highlighted = value;
+			if (cellRenderer == null)
+				return;
 			Color clr = highlighted ? Color.green : Color.white;
 			clr.a = cellRenderer.color.a;
 			cellRenderer.color = clr;
@@ -34,6 +38,8 @@ public class GridCell : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cellRenderer = transform.GetChild (0).GetComponent<SpriteRenderer> ();
+		Blocked = blocked;
+		Highlighted = highlighted;
 	}
 
 }

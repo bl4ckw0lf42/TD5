@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tower : MonoBehaviour {
 
 	public GameObject bulletPrefab;
+	public string name = "Tower";
 	public float damage = 1.0f;
 	public float fireRate = 1.0f;
 	public float range = 1.0f;
@@ -18,7 +19,8 @@ public class Tower : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		cannon = transform.FindChild ("Cannon").gameObject;
+		cannon = transform.Find ("Cannon").gameObject;
+		GetComponent<CircleCollider2D> ().radius = range;
 		currentDirection = Vector3.down;
 
 		enemiesInRange = new List<Enemy> ();

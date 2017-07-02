@@ -34,6 +34,10 @@ public class Enemy : MonoBehaviour {
 		pathEnumerator.MoveNext ();
 		t = pathEnumerator.Current as Transform;
 		targetPosition = t.position;
+		transform.rotation = Quaternion.identity;
+		Vector3 dir = targetPosition - transform.position;
+		dir.z = 0;
+		transform.rotation = Quaternion.FromToRotation (Vector3.down, dir);
 
 	}
 	
@@ -46,6 +50,10 @@ public class Enemy : MonoBehaviour {
 			if (pathEnumerator.MoveNext ()) {
 				Transform t = pathEnumerator.Current as Transform;
 				targetPosition = t.position;
+				transform.rotation = Quaternion.identity;
+				Vector3 dir2 = targetPosition - transform.position;
+				dir.z = 0;
+				transform.rotation = Quaternion.FromToRotation (Vector3.down, dir2);
 			} else {
 				OnEndOfPath();
 			}
